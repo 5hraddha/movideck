@@ -5,23 +5,29 @@ import '../movideck_theme.dart';
 class Home extends StatelessWidget {
   const Home({super.key});
 
+  final List<String> movieCategories = const [
+    'Now Playing',
+    'New Releases',
+    'Popular Movies',
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        _buildNowPlaying(),
-      ],
-    );
+    return ListView.builder(
+        itemCount: movieCategories.length,
+        itemBuilder: (context, index) {
+          return _buildMovieCategory(movieCategories[index]);
+        });
   }
 
-  Widget _buildNowPlaying() {
+  Widget _buildMovieCategory(String category) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.only(left: 18.0),
           child: Text(
-            'Now Playing',
+            '$category',
             style: MoviDeckTheme.lightTextTheme.headline2,
           ),
         ),
@@ -37,6 +43,7 @@ class Home extends StatelessWidget {
             separatorBuilder: (context, index) => const SizedBox(width: 1.0),
           ),
         ),
+        const SizedBox(height: 37.0),
       ],
     );
   }
