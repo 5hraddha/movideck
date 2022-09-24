@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './theme_switch.dart';
+import './components/components.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
