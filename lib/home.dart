@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './theme_switch.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -32,6 +33,9 @@ class _HomeState extends State<Home> {
             height: 32.0,
           ),
           centerTitle: false,
+          actions: [
+            const ThemeSwitch(),
+          ],
         ),
         body: pages[_selectedIndex],
         bottomNavigationBar: BottomNavigationBar(

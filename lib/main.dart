@@ -22,7 +22,7 @@ class MoviDeckApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = MoviDeckTheme.dark();
+    final theme = MoviDeckTheme.light();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: theme,
