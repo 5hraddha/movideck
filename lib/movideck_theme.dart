@@ -35,14 +35,14 @@ class MoviDeckTheme {
       color: const Color(0xFF1C2A40),
     ),
     headline5: GoogleFonts.acme(
-      fontSize: 10.0,
+      fontSize: 12.0,
       fontWeight: FontWeight.normal,
       color: const Color(0xFFFFFFFF),
     ),
     headline6: GoogleFonts.acme(
-      fontSize: 6.0,
+      fontSize: 10.0,
       fontWeight: FontWeight.normal,
-      color: const Color(0xFFFFFFFF),
+      color: const Color(0xFFECDBBA),
     ),
   );
 
@@ -79,14 +79,14 @@ class MoviDeckTheme {
       color: const Color(0xFFECDBBA),
     ),
     headline5: GoogleFonts.acme(
-      fontSize: 10.0,
+      fontSize: 12.0,
       fontWeight: FontWeight.normal,
       color: const Color(0xFFFFFFFF),
     ),
     headline6: GoogleFonts.acme(
-      fontSize: 6.0,
+      fontSize: 10.0,
       fontWeight: FontWeight.normal,
-      color: const Color(0xFFFFFFFF),
+      color: const Color(0xFFECDBBA),
     ),
   );
 

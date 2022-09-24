@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import './movideck_theme.dart';
-import './home.dart';
+import './app.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
@@ -14,20 +14,5 @@ void main() {
       systemNavigationBarIconBrightness: Brightness.light,
     ),
   );
-  runApp(const MoviDeckApp());
-}
-
-class MoviDeckApp extends StatelessWidget {
-  const MoviDeckApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = MoviDeckTheme.light();
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: theme,
-      title: 'MoviDeck',
-      home: const Home(),
-    );
-  }
+  runApp(const App());
 }
