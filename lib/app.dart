@@ -42,6 +42,7 @@ class _AppState extends State<App> {
             centerTitle: false,
             actions: [
               const ThemeSwitch(),
+              const UserAppProfile(),
             ],
           ),
           body: pages[_selectedIndex],

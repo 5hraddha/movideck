@@ -25,14 +25,14 @@ class Home extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.only(left: 18.0),
+          padding: const EdgeInsets.only(left: 18.0, top: 16.0),
           child: Text(
             '$category',
             style: MoviDeckTheme.lightTextTheme.headline2,
           ),
         ),
         const SizedBox(height: 16.0),
-        Container(
+        SizedBox(
           height: 200.0,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
