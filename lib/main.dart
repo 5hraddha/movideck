@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import './movideck_theme.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import './app.dart';
 
-void main() {
+Future main() async {
+  // Load .env file
+  await dotenv.load(fileName: '.env');
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,

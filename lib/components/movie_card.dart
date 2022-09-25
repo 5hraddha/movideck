@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import '../models/models.dart';
 import '../movideck_theme.dart';
 
 class MovieCard extends StatelessWidget {
-  const MovieCard({super.key});
+  const MovieCard({super.key, required this.movie});
+
+  final Movie movie;
 
   @override
   Widget build(BuildContext context) {
@@ -20,28 +23,30 @@ class MovieCard extends StatelessWidget {
         ),
         child: Column(
           children: <Widget>[
-            _buildBanner(),
-            _buildDetails(),
+            _buildBanner(movie.posterPath),
+            _buildDetails(movie),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildBanner() {
+  Widget _buildBanner(String? url) {
+    final imageUrl = 'https://image.tmdb.org/t/p/original/$url';
     return SizedBox(
       width: double.infinity,
       height: 136.0,
-      child: Image.asset(
-        'assets/images/boss-baby.jpg',
+      child: Image.network(
+        imageUrl,
         fit: BoxFit.cover,
       ),
     );
   }
 
-  Widget _buildDetails() {
+  Widget _buildDetails(Movie movie) {
     return Container(
       height: 56.0,
+      width: double.infinity,
       padding: const EdgeInsets.all(6.0),
       decoration: const BoxDecoration(
         color: Color(0xFFC84B31),
@@ -52,25 +57,25 @@ class MovieCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          _buildTitle(),
-          _buildSubtitle(),
+          _buildTitle(movie.title),
+          _buildSubtitle(movie.releaseDate),
         ],
       ),
     );
   }
 
-  Widget _buildTitle() {
+  Widget _buildTitle(String title) {
     return Text(
-      'The Boss Baby: Family Business',
+      '$title',
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
       style: MoviDeckTheme.lightTextTheme.headline5,
     );
   }
 
-  Widget _buildSubtitle() {
+  Widget _buildSubtitle(String releaseDate) {
     return Text(
-      '2021 | 1 h 30 min | PG',
+      '$releaseDate',
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
       style: MoviDeckTheme.lightTextTheme.headline6,
