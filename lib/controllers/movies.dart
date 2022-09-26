@@ -17,4 +17,8 @@ class MovieController {
   Future<List<Movie>> fetchTopRatedMovies() {
     return _repository.getTopRatedMovies();
   }
+
+  Future<List<Movie>> fetchUpcomingMovies() {
+    return _repository.getUpcomingMovies();
+  }
 }

@@ -35,6 +35,11 @@ class _HomeState extends State<Home> {
             _controller.fetchTopRatedMovies,
             'Top Rated',
           ),
+          _buildMoviesSection(
+            context,
+            _controller.fetchUpcomingMovies,
+            'Upcoming',
+          ),
         ],
       ),
     );
