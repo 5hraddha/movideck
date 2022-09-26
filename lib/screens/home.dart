@@ -13,30 +13,30 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final List<String> movieCategories = const [
-    'Now Playing',
-    'Popular',
-    'Top Rated',
-    'Upcoming',
-  ];
-
   final _controller = MovieController(MovieRepository());
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        _buildMoviesSection(
-          context,
-          _controller.fetchNowPlayingMovies,
-          'Now Playing',
-        ),
-        _buildMoviesSection(
-          context,
-          _controller.fetchPopularMovies,
-          'Popular',
-        ),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          _buildMoviesSection(
+            context,
+            _controller.fetchNowPlayingMovies,
+            'Now Playing',
+          ),
+          _buildMoviesSection(
+            context,
+            _controller.fetchPopularMovies,
+            'Popular',
+          ),
+          _buildMoviesSection(
+            context,
+            _controller.fetchTopRatedMovies,
+            'Top Rated',
+          ),
+        ],
+      ),
     );
   }
 
