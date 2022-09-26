@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/models.dart';
+import '../models/movie_language.dart';
 import '../movideck_theme.dart';
 
 class MovieCard extends StatelessWidget {
@@ -58,7 +59,7 @@ class MovieCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           _buildTitle(movie.title),
-          _buildSubtitle(movie.releaseDate, movie.originalLanguage),
+          _buildSubtitle(movie.releaseDate, movie.originalLanguage.name),
         ],
       ),
     );
