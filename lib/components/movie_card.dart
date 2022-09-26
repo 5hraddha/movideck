@@ -22,10 +22,33 @@ class MovieCard extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
-        child: Column(
-          children: <Widget>[
-            _buildBanner(movie.posterPath),
-            _buildDetails(movie),
+        child: Stack(
+          children: [
+            Column(
+              children: <Widget>[
+                _buildBanner(movie.posterPath),
+                _buildDetails(movie),
+              ],
+            ),
+            Positioned(
+              top: 10.0,
+              right: 10.0,
+              child: Container(
+                width: 30.0,
+                height: 30.0,
+                decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(50.0)),
+                child: IconButton(
+                  icon: const Icon(
+                    Icons.add,
+                    color: Colors.white,
+                    size: 15.0,
+                  ),
+                  onPressed: () {},
+                ),
+              ),
+            ),
           ],
         ),
       ),
