@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import '../components/components.dart';
-import '../repository/movie_repository.dart';
 import '../controllers/movies.dart';
-import '../models/movie.dart';
+import '../models/models.dart';
+import '../screens/screens.dart';
+import '../repository/movie_repository.dart';
 import '../movideck_theme.dart';
 
 class Home extends StatefulWidget {
@@ -72,9 +73,34 @@ class _HomeState extends State<Home> {
               height: 200.0,
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
-                itemCount: movies!.length,
+                itemCount: movies.length,
                 itemBuilder: (context, index) {
-                  return MovieCard(movie: movies[index]);
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => FutureBuilder(
+                            future:
+                                _controller.fetchMovieDetail(movies[index].id),
+                            builder: (context, snapshot) {
+                              final movieDetail = snapshot.data;
+                              if (movieDetail == null) {
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              }
+                              return MovieDetailScreen(
+                                imageUrl: movies[index].posterPath!,
+                                movieDetail: movieDetail,
+                              );
+                            },
+                          ),
+                        ),
+                      );
+                    },
+                    child: MovieCard(movie: movies[index]),
+                  );
                 },
                 separatorBuilder: (context, index) =>
                     const SizedBox(width: 1.0),

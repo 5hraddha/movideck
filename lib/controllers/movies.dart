@@ -21,4 +21,8 @@ class MovieController {
   Future<List<Movie>> fetchUpcomingMovies() {
     return _repository.getUpcomingMovies();
   }
+
+  Future<MovieDetail> fetchMovieDetail(int movieId) {
+    return _repository.getMovieDetail(movieId);
+  }
 }

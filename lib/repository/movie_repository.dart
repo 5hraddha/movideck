@@ -43,4 +43,12 @@ class MovieRepository implements Repository {
     List<Movie> movieList = movies.map((m) => Movie.fromJson(m)).toList();
     return movieList;
   }
+
+  @override
+  Future<MovieDetail> getMovieDetail(int movieId) async {
+    final url = '$_baseUrl/movie/$movieId?api_key=$_apiKey';
+    final response = await _dio.get(url);
+    final MovieDetail movieDetail = MovieDetail.fromJson(response.data);
+    return movieDetail;
+  }
 }
