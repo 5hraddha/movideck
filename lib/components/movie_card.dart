@@ -58,7 +58,7 @@ class MovieCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           _buildTitle(movie.title),
-          _buildSubtitle(movie.releaseDate),
+          _buildSubtitle(movie.releaseDate, movie.originalLanguage),
         ],
       ),
     );
@@ -73,12 +73,17 @@ class MovieCard extends StatelessWidget {
     );
   }
 
-  Widget _buildSubtitle(String releaseDate) {
+  Widget _buildSubtitle(String releaseDate, String language) {
+    final year = _getYear(releaseDate);
     return Text(
-      '$releaseDate',
+      '$year | $language',
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
       style: MoviDeckTheme.lightTextTheme.headline6,
     );
+  }
+
+  String _getYear(String date) {
+    return date.substring(0, 4);
   }
 }

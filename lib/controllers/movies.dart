@@ -9,4 +9,8 @@ class MovieController {
   Future<List<Movie>> fetchNowPlayingMovies() {
     return _repository.getNowPlayingMovies();
   }
+
+  Future<List<Movie>> fetchPopularMovies() {
+    return _repository.getPopularMovies();
+  }
 }

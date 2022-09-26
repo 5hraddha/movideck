@@ -24,13 +24,29 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    // return ListView.builder(
-    //     itemCount: movieCategories.length,
-    //     itemBuilder: (context, index) {
-    //       return _buildMovieCategory(movieCategories[index]);
-    //     });
+    return Column(
+      children: [
+        _buildMoviesSection(
+          context,
+          _controller.fetchNowPlayingMovies,
+          'Now Playing',
+        ),
+        _buildMoviesSection(
+          context,
+          _controller.fetchPopularMovies,
+          'Popular',
+        ),
+      ],
+    );
+  }
+
+  Widget _buildMoviesSection(
+    BuildContext context,
+    Function apiMethod,
+    String sectionTitle,
+  ) {
     return FutureBuilder<List<Movie>>(
-        future: _controller.fetchNowPlayingMovies(),
+        future: apiMethod(),
         builder: (context, snapshot) {
           final movies = snapshot.data;
           if (movies == null) {
@@ -42,7 +58,7 @@ class _HomeState extends State<Home> {
               Padding(
                 padding: const EdgeInsets.only(left: 18.0, top: 10.0),
                 child: Text(
-                  'Now Playing',
+                  '$sectionTitle',
                   style: MoviDeckTheme.lightTextTheme.headline2,
                 ),
               ),
