@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import './movideck_theme.dart';
 import './app.dart';
 
 Future main() async {
@@ -16,5 +18,8 @@ Future main() async {
       systemNavigationBarIconBrightness: Brightness.light,
     ),
   );
-  runApp(const App());
+  runApp(ChangeNotifierProvider(
+    create: (context) => MoviDeckTheme(),
+    child: const App(),
+  ));
 }

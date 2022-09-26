@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import './movideck_theme.dart';
 import './components/components.dart';
 import './screens/screens.dart';
@@ -12,7 +13,7 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   int _selectedIndex = 0;
-  final theme = MoviDeckTheme.light();
+  // final theme = MoviDeckTheme.light();
 
   static List<Widget> pages = <Widget>[
     const Home(),
@@ -27,50 +28,52 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: theme,
-      title: 'MoviDeck',
-      home: SafeArea(
-        child: Scaffold(
-          appBar: AppBar(
-            title: Image.asset(
-              'assets/images/logo.png',
-              fit: BoxFit.cover,
-              height: 32.0,
+    return Consumer<MoviDeckTheme>(builder: (context, theme, child) {
+      return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: theme.isDarkTheme ? MoviDeckTheme.dark() : MoviDeckTheme.light(),
+        title: 'MoviDeck',
+        home: SafeArea(
+          child: Scaffold(
+            appBar: AppBar(
+              title: Image.asset(
+                'assets/images/logo.png',
+                fit: BoxFit.cover,
+                height: 32.0,
+              ),
+              centerTitle: false,
+              actions: [
+                const ThemeSwitch(),
+                const UserAppProfile(),
+              ],
             ),
-            centerTitle: false,
-            actions: [
-              const ThemeSwitch(),
-              const UserAppProfile(),
-            ],
-          ),
-          body: pages[_selectedIndex],
-          bottomNavigationBar: BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            currentIndex: _selectedIndex,
-            onTap: _onItemTapped,
-            items: [
-              const BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: 'Home',
-              ),
-              const BottomNavigationBarItem(
-                icon: Icon(Icons.filter_alt),
-                label: 'Filter',
-              ),
-              const BottomNavigationBarItem(
-                icon: Icon(Icons.favorite),
-                label: 'Favorite',
-              ),
-              const BottomNavigationBarItem(
-                icon: Icon(Icons.person),
-                label: 'Profile',
-              ),
-            ],
+            body: pages[_selectedIndex],
+            bottomNavigationBar: BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
+              currentIndex: _selectedIndex,
+              onTap: _onItemTapped,
+              items: [
+                const BottomNavigationBarItem(
+                  icon: Icon(Icons.home),
+                  label: 'Home',
+                ),
+                const BottomNavigationBarItem(
+                  icon: Icon(Icons.filter_alt),
+                  label: 'Filter',
+                ),
+                const BottomNavigationBarItem(
+                  icon: Icon(Icons.favorite),
+                  label: 'Favorite',
+                ),
+                const BottomNavigationBarItem(
+                  icon: Icon(Icons.person),
+                  label: 'Profile',
+                ),
+              ],
+            ),
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 }

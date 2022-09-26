@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../movideck_theme.dart';
 
 class ThemeSwitch extends StatefulWidget {
   const ThemeSwitch({super.key});
@@ -8,19 +9,20 @@ class ThemeSwitch extends StatefulWidget {
 }
 
 class _ThemeSwitchState extends State<ThemeSwitch> {
-  bool _isDarkTheme = false;
+  bool isDarkTheme = false;
 
-  void toggleTheme(value) {
+  void _toggleTheme(value) {
     setState(() {
-      _isDarkTheme = value;
+      isDarkTheme = value;
+      MoviDeckTheme().toggleCurrentTheme();
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Switch(
-      value: _isDarkTheme,
-      onChanged: toggleTheme,
+      value: isDarkTheme,
+      onChanged: _toggleTheme,
       trackColor: MaterialStateProperty.all(const Color(0xFFC84B31)),
       activeColor: Colors.white,
       splashRadius: 10.0,
