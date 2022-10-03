@@ -36,6 +36,7 @@ class MovieCard extends StatelessWidget {
     );
   }
 
+  // Build the card's banner
   Widget _buildBanner(String? imageUrl) {
     return Container(
       width: double.infinity,
@@ -51,6 +52,7 @@ class MovieCard extends StatelessWidget {
     );
   }
 
+  // Build the card's details text section
   Widget _buildDetails(String title, String releaseDate, String language) {
     return Container(
       height: 56.0,
@@ -72,6 +74,7 @@ class MovieCard extends StatelessWidget {
     );
   }
 
+  // Build the card's title
   Widget _buildTitle(String title) {
     return Text(
       '$title',
@@ -81,6 +84,7 @@ class MovieCard extends StatelessWidget {
     );
   }
 
+  // Build the card's subtitle
   Widget _buildSubtitle(String releaseDate, String language) {
     final year = _getYear(releaseDate);
     return Text(
@@ -112,6 +116,7 @@ class MovieCard extends StatelessWidget {
     );
   }
 
+  // Get the year alone from the movie release date
   String _getYear(String date) {
     return date.substring(0, 4);
   }
