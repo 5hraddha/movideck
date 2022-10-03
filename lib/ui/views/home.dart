@@ -85,26 +85,15 @@ class _HomeState extends State<Home> {
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => FutureBuilder(
-              // future: _controller.fetchMovieDetail(movies[index].id),
-              //       builder: (context, snapshot) {
-              //         final movieDetail = snapshot.data;
-              //         if (movieDetail == null) {
-              //           return const Center(
-              //             child: CircularProgressIndicator(),
-              //           );
-              //         }
-              //         return MovieDetailScreen(
-              //           imageUrl: movies[index].posterPath!,
-              //           movieDetail: movieDetail,
-              //         );
-              //       },
-              //     ),
-              //   ),
-              // );
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => MovieDetail(
+                    movieId: currentMoviesModel[index].id,
+                    posterUrl: currentMoviesModel[index].posterUrl,
+                  ),
+                ),
+              );
             },
             child: MovieCard(movie: currentMoviesModel[index]),
           );
