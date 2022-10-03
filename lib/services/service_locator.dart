@@ -13,4 +13,6 @@ void setupServiceLocator() {
   serviceLocator.registerFactory<HomeViewModel>(() => HomeViewModel());
   serviceLocator
       .registerFactory<MovieDetailViewModel>(() => MovieDetailViewModel());
+  serviceLocator.registerFactory<BottomNavigationBarViewModel>(
+      () => BottomNavigationBarViewModel());
 }

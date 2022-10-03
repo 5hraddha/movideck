@@ -90,25 +90,4 @@ class MovieDetail extends StatelessWidget {
       ],
     );
   }
-
-  Widget _buildAddFavouriteButton() {
-    return Positioned(
-      top: 30.0,
-      right: 10.0,
-      child: Container(
-        width: 30.0,
-        height: 30.0,
-        decoration: BoxDecoration(
-            color: Colors.black, borderRadius: BorderRadius.circular(50.0)),
-        child: IconButton(
-          icon: const Icon(
-            Icons.add,
-            color: Colors.white,
-            size: 15.0,
-          ),
-          onPressed: () {},
-        ),
-      ),
-    );
-  }
 }

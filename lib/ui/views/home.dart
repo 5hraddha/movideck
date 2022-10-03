@@ -6,14 +6,8 @@ import '../views/views.dart';
 import '../widgets/widgets.dart';
 import '../movideck_theme.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
-
-  @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
+class Home extends StatelessWidget {
+  Home({super.key});
   final HomeViewModel model = serviceLocator<HomeViewModel>();
 
   // List of section titles to display on the home view
