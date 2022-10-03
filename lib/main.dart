@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import './movideck_theme.dart';
-import './app.dart';
+
+import 'services/service_locator.dart';
+import 'ui/views/views.dart';
+import 'ui/widgets/widgets.dart';
+import 'ui/movideck_theme.dart';
 
 Future main() async {
+  setupServiceLocator();
   // Load .env file
   await dotenv.load(fileName: '.env');
   SystemChrome.setSystemUIOverlayStyle(
@@ -18,8 +21,77 @@ Future main() async {
       systemNavigationBarIconBrightness: Brightness.light,
     ),
   );
-  runApp(ChangeNotifierProvider(
-    create: (context) => MoviDeckTheme(),
-    child: const App(),
-  ));
+  runApp(const App());
+}
+
+class App extends StatefulWidget {
+  const App({super.key});
+
+  @override
+  State<App> createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+  int _selectedIndex = 0;
+  // final theme = MoviDeckTheme.light();
+
+  static List<Widget> pages = <Widget>[
+    const Home(),
+    Container(color: Colors.red),
+    Container(color: Colors.green),
+    Container(color: Colors.orange),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() => _selectedIndex = index);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'MoviDeck',
+      theme: MoviDeckTheme.light(),
+      home: SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            title: Image.asset(
+              'assets/images/logo.png',
+              fit: BoxFit.cover,
+              height: 32.0,
+            ),
+            centerTitle: false,
+            actions: [
+              const ThemeSwitch(),
+              const UserAppProfile(),
+            ],
+          ),
+          body: pages[_selectedIndex],
+          bottomNavigationBar: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            currentIndex: _selectedIndex,
+            onTap: _onItemTapped,
+            items: [
+              const BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: 'Home',
+              ),
+              const BottomNavigationBarItem(
+                icon: Icon(Icons.filter_alt),
+                label: 'Filter',
+              ),
+              const BottomNavigationBarItem(
+                icon: Icon(Icons.favorite),
+                label: 'Favorite',
+              ),
+              const BottomNavigationBarItem(
+                icon: Icon(Icons.person),
+                label: 'Profile',
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }

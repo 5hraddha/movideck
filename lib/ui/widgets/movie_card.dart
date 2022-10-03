@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import '../models/models.dart';
-import '../models/movie_language.dart';
+
+import '../../business_logic/view_models/viewmodels.dart';
 import '../movideck_theme.dart';
 
 class MovieCard extends StatelessWidget {
   const MovieCard({super.key, required this.movie});
-
-  final Movie movie;
+  final MovieViewModel movie;
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +25,8 @@ class MovieCard extends StatelessWidget {
           children: [
             Column(
               children: <Widget>[
-                _buildBanner(movie.posterPath),
-                _buildDetails(movie),
+                _buildBanner(movie.posterUrl),
+                _buildDetails(movie.title, movie.releaseDate, movie.language),
               ],
             ),
             Positioned(
@@ -55,19 +54,18 @@ class MovieCard extends StatelessWidget {
     );
   }
 
-  Widget _buildBanner(String? url) {
-    final imageUrl = 'https://image.tmdb.org/t/p/original/$url';
+  Widget _buildBanner(String? imageUrl) {
     return SizedBox(
       width: double.infinity,
       height: 136.0,
       child: Image.network(
-        imageUrl,
+        imageUrl!,
         fit: BoxFit.cover,
       ),
     );
   }
 
-  Widget _buildDetails(Movie movie) {
+  Widget _buildDetails(String title, String releaseDate, String language) {
     return Container(
       height: 56.0,
       width: double.infinity,
@@ -81,8 +79,8 @@ class MovieCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          _buildTitle(movie.title),
-          _buildSubtitle(movie.releaseDate, movie.originalLanguage.name),
+          _buildTitle(title),
+          _buildSubtitle(releaseDate, language),
         ],
       ),
     );

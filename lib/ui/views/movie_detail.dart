@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../components/components.dart';
+import '../widgets/widgets.dart';
 
 class MovieDetailScreen extends StatelessWidget {
   final String imageUrl;
