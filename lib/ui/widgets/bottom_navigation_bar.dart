@@ -11,9 +11,9 @@ class BottomNavigationBarWidget extends StatelessWidget {
   // List of views to show in BottomNavigationBar
   static List<Widget> pages = <Widget>[
     Home(),
-    Container(color: Colors.red),
-    Container(color: Colors.green),
-    Container(color: Colors.orange),
+    const FilterMovies(),
+    const FavouriteMovies(),
+    const UserProfile(),
   ];
 
   @override

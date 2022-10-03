@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../business_logic/view_models/theme_switch_view_model.dart';
 import '../../business_logic/view_models/viewmodels.dart';
 import '../../services/service_locator.dart';
 import '../views/views.dart';
