@@ -37,12 +37,16 @@ class MovieCard extends StatelessWidget {
   }
 
   Widget _buildBanner(String? imageUrl) {
-    return SizedBox(
+    return Container(
       width: double.infinity,
       height: 136.0,
-      child: Image.network(
-        imageUrl!,
-        fit: BoxFit.cover,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          fit: BoxFit.cover,
+          colorFilter: ColorFilter.mode(
+              Colors.black.withOpacity(0.7), BlendMode.dstATop),
+          image: NetworkImage(imageUrl!),
+        ),
       ),
     );
   }
@@ -53,7 +57,7 @@ class MovieCard extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(6.0),
       decoration: const BoxDecoration(
-        color: Color(0xFFC84B31),
+        color: Color(0xFFB5251B),
         borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(10.0),
             bottomRight: Radius.circular(10.0)),

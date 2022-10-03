@@ -27,10 +27,15 @@ class CustomAppBar extends StatelessWidget {
       pinned: true,
       elevation: 0,
       flexibleSpace: FlexibleSpaceBar(
-        background: Image.network(
-          imagePath,
-          width: double.infinity,
-          fit: BoxFit.fitWidth,
+        background: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              colorFilter: ColorFilter.mode(
+                  Colors.black.withOpacity(0.7), BlendMode.dstATop),
+              image: NetworkImage(imagePath),
+            ),
+          ),
         ),
       ),
     );

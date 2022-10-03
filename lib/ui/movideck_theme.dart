@@ -114,7 +114,7 @@ class MoviDeckTheme extends ChangeNotifier {
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         backgroundColor: Color(0xFF191919),
         unselectedItemColor: Color(0xFFECDBBA),
-        selectedItemColor: Color(0xFFC84B31),
+        selectedItemColor: Color(0xFFB5251B),
       ),
       textTheme: lightTextTheme,
     );
@@ -136,7 +136,7 @@ class MoviDeckTheme extends ChangeNotifier {
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         backgroundColor: Color(0xFF191919),
         unselectedItemColor: Color(0xFFECDBBA),
-        selectedItemColor: Color(0xFFC84B31),
+        selectedItemColor: Color(0xFFB5251B),
       ),
       textTheme: darkTextTheme,
     );
