@@ -44,7 +44,7 @@ class MovieCard extends StatelessWidget {
         image: DecorationImage(
           fit: BoxFit.cover,
           colorFilter: ColorFilter.mode(
-              Colors.black.withOpacity(0.7), BlendMode.dstATop),
+              Colors.black.withOpacity(0.8), BlendMode.dstATop),
           image: NetworkImage(imageUrl!),
         ),
       ),

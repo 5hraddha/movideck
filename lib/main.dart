@@ -4,6 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 
 import '../../business_logic/view_models/viewmodels.dart';
+import 'business_logic/view_models/theme_switch_view_model.dart';
 import 'services/service_locator.dart';
 import 'ui/widgets/widgets.dart';
 import 'ui/movideck_theme.dart';
@@ -30,14 +31,23 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'MoviDeck',
-      theme: MoviDeckTheme.light(),
-      home: ChangeNotifierProvider<BottomNavigationBarViewModel>(
-        child: const BottomNavigationBarWidget(),
-        create: (BuildContext context) => BottomNavigationBarViewModel(),
+    return ChangeNotifierProvider<ThemeSwitchViewModel>(
+      child: Consumer<ThemeSwitchViewModel>(
+        builder: (context, ThemeSwitchViewModel themeNotifier, child) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'MoviDeck',
+            theme: themeNotifier.isDark
+                ? MoviDeckTheme.dark()
+                : MoviDeckTheme.light(),
+            home: ChangeNotifierProvider<BottomNavigationBarViewModel>(
+              child: const BottomNavigationBarWidget(),
+              create: (BuildContext context) => BottomNavigationBarViewModel(),
+            ),
+          );
+        },
       ),
+      create: (BuildContext context) => ThemeSwitchViewModel(),
     );
   }
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../business_logic/view_models/theme_switch_view_model.dart';
 import '../../business_logic/view_models/viewmodels.dart';
 import '../../services/service_locator.dart';
 import '../views/views.dart';
@@ -20,11 +22,13 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeSwitchProvider = Provider.of<ThemeSwitchViewModel>(context);
     return ListView.builder(
       itemCount: sectionTitles.length,
       itemBuilder: (context, index) {
         return _buildMoviesSection(
             context,
+            themeSwitchProvider,
             _getLoadDataMethod(model, sectionTitles[index]),
             sectionTitles[index]);
       },
@@ -34,6 +38,7 @@ class Home extends StatelessWidget {
   //Build each section of the home view
   Widget _buildMoviesSection(
     BuildContext context,
+    ThemeSwitchViewModel provider,
     Function loadDataMethod,
     String sectionTitle,
   ) {
@@ -48,7 +53,7 @@ class Home extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            _buildSectionTitle(sectionTitle),
+            _buildSectionTitle(provider, sectionTitle),
             const SizedBox(height: 10.0),
             _buildSectionHorizontalList(currentMoviesModel),
             const SizedBox(height: 10.0),
@@ -59,12 +64,15 @@ class Home extends StatelessWidget {
   }
 
   // Build section title
-  Widget _buildSectionTitle(String sectionTitle) {
+  Widget _buildSectionTitle(
+      ThemeSwitchViewModel provider, String sectionTitle) {
     return Padding(
       padding: const EdgeInsets.only(left: 18.0, top: 10.0),
       child: Text(
         '$sectionTitle',
-        style: MoviDeckTheme.lightTextTheme.headline2,
+        style: provider.isDark
+            ? MoviDeckTheme.darkTextTheme.headline2
+            : MoviDeckTheme.lightTextTheme.headline2,
       ),
     );
   }

@@ -23,13 +23,14 @@ class MovieDetail extends StatelessWidget {
       extendBody: true,
       backgroundColor: const Color(0xFFB5251B),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        backgroundColor: Colors.black,
         splashColor: const Color(0xFFB5251B),
         child: const Icon(
           Icons.add,
           color: Colors.white,
           size: 25.0,
         ),
+        onPressed: () {},
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       body: FutureBuilder(

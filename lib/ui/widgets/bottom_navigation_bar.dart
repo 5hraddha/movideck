@@ -18,12 +18,14 @@ class BottomNavigationBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<BottomNavigationBarViewModel>(context);
+    final bottomNavigationBarProvider =
+        Provider.of<BottomNavigationBarViewModel>(context);
     return SafeArea(
       child: Scaffold(
         appBar: _buildAppBar(),
-        body: pages[provider.currentSelectedIndex],
-        bottomNavigationBar: _buildBottomNavigationBar(provider),
+        body: pages[bottomNavigationBarProvider.currentSelectedIndex],
+        bottomNavigationBar:
+            _buildBottomNavigationBar(bottomNavigationBarProvider),
       ),
     );
   }
