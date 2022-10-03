@@ -4,7 +4,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 
 import '../../business_logic/view_models/viewmodels.dart';
-import 'business_logic/view_models/theme_switch_view_model.dart';
 import 'services/service_locator.dart';
 import 'ui/widgets/widgets.dart';
 import 'ui/movideck_theme.dart';
