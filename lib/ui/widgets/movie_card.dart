@@ -29,25 +29,7 @@ class MovieCard extends StatelessWidget {
                 _buildDetails(movie.title, movie.releaseDate, movie.language),
               ],
             ),
-            Positioned(
-              top: 10.0,
-              right: 10.0,
-              child: Container(
-                width: 30.0,
-                height: 30.0,
-                decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(50.0)),
-                child: IconButton(
-                  icon: const Icon(
-                    Icons.add,
-                    color: Colors.white,
-                    size: 15.0,
-                  ),
-                  onPressed: () {},
-                ),
-              ),
-            ),
+            _buildAddFavouriteButton(),
           ],
         ),
       ),
@@ -102,6 +84,27 @@ class MovieCard extends StatelessWidget {
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
       style: MoviDeckTheme.lightTextTheme.headline6,
+    );
+  }
+
+  Widget _buildAddFavouriteButton() {
+    return Positioned(
+      top: 10.0,
+      right: 10.0,
+      child: Container(
+        width: 30.0,
+        height: 30.0,
+        decoration: BoxDecoration(
+            color: Colors.black, borderRadius: BorderRadius.circular(50.0)),
+        child: IconButton(
+          icon: const Icon(
+            Icons.add,
+            color: Colors.white,
+            size: 15.0,
+          ),
+          onPressed: () {},
+        ),
+      ),
     );
   }
 

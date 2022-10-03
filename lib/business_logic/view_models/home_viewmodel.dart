@@ -17,13 +17,29 @@ class HomeViewModel extends ChangeNotifier {
   List<MovieViewModel> get topRatedMovies => _topRatedMovies;
   List<MovieViewModel> get upcomingMovies => _upcomingMovies;
 
-  void loadData() async {
-    //Load all data from different api endpoints
+  // Get all the data from the web api
+  Future<List<MovieViewModel>> loadNowPlayingMoviesData() async {
     _nowPlayingMovies = _getMovies(await _webApi.getNowPlayingMovies());
+    notifyListeners();
+    return _nowPlayingMovies;
+  }
+
+  Future<List<MovieViewModel>> loadPopularMoviesData() async {
     _popularMovies = _getMovies(await _webApi.getPopularMovies());
+    notifyListeners();
+    return _popularMovies;
+  }
+
+  Future<List<MovieViewModel>> loadTopRatedMoviesData() async {
     _topRatedMovies = _getMovies(await _webApi.getTopRatedMovies());
+    notifyListeners();
+    return _topRatedMovies;
+  }
+
+  Future<List<MovieViewModel>> loadUpcomingMoviesData() async {
     _upcomingMovies = _getMovies(await _webApi.getUpcomingMovies());
     notifyListeners();
+    return _upcomingMovies;
   }
 
   List<MovieViewModel> _getMovies(List<Movie> futureMovies) {
