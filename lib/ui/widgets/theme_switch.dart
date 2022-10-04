@@ -8,11 +8,14 @@ class ThemeSwitch extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _themeNotifier = ref.watch(themeNotifierProvider.notifier);
+    final _themeNotifier = ref.watch(themeNotifierProvider);
     return Switch(
       value: _themeNotifier.isDark,
-      onChanged: (value) =>
-          ref.read(themeNotifierProvider.notifier).isDark = value,
+      onChanged: (value) {
+        final newThemeNotifier = ThemeSwitchProvider();
+        newThemeNotifier.toggleTheme(value);
+        ref.read(themeNotifierProvider.notifier).state = newThemeNotifier;
+      },
       trackColor: MaterialStateProperty.all(const Color(0xFFC84B31)),
       activeColor: Colors.white,
       splashRadius: 10.0,

@@ -9,7 +9,7 @@ class FavouriteMovies extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _themeNotifier = ref.watch(themeNotifierProvider.notifier);
+    final _themeNotifier = ref.watch(themeNotifierProvider);
     return Center(
       child: Text(
         'Under Construction',

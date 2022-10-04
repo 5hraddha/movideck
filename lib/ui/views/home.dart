@@ -20,7 +20,7 @@ class Home extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _themeNotifier = ref.watch(themeNotifierProvider.notifier);
+    final _themeNotifier = ref.watch(themeNotifierProvider);
     return ListView.builder(
       itemCount: sectionTitles.length,
       itemBuilder: (context, index) {
@@ -68,7 +68,7 @@ class Home extends ConsumerWidget {
       padding: const EdgeInsets.only(left: 18.0, top: 10.0),
       child: Text(
         '$sectionTitle',
-        style: themeNotifier.isDark
+        style: themeNotifier.isDark ?? false
             ? MoviDeckTheme.darkTextTheme.headline2
             : MoviDeckTheme.lightTextTheme.headline2,
       ),
