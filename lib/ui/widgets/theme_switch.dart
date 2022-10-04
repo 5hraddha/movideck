@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../business_logic/view_models/theme_switch_view_model.dart';
+import '../../business_logic/view_models/theme_switch_provider.dart';
 
-class ThemeSwitch extends StatelessWidget {
+class ThemeSwitch extends ConsumerWidget {
   const ThemeSwitch({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final provider = Provider.of<ThemeSwitchViewModel>(context);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final _themeNotifier = ref.watch(themeNotifierProvider.notifier);
     return Switch(
-      value: provider.isDark,
-      onChanged: (value) => provider.isDark = value,
+      value: _themeNotifier.isDark,
+      onChanged: (value) =>
+          ref.read(themeNotifierProvider.notifier).isDark = value,
       trackColor: MaterialStateProperty.all(const Color(0xFFC84B31)),
       activeColor: Colors.white,
       splashRadius: 10.0,

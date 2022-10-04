@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../business_logic/view_models/viewmodels.dart';
-import 'services/service_locator.dart';
 import 'ui/widgets/widgets.dart';
 import 'ui/movideck_theme.dart';
 
 Future main() async {
-  setupServiceLocator();
   // Load .env file
   await dotenv.load(fileName: '.env');
   SystemChrome.setSystemUIOverlayStyle(
@@ -22,31 +20,22 @@ Future main() async {
       systemNavigationBarIconBrightness: Brightness.light,
     ),
   );
-  runApp(const App());
+  runApp(const ProviderScope(child: App()));
 }
 
-class App extends StatelessWidget {
+class App extends ConsumerWidget {
   const App({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return ChangeNotifierProvider<ThemeSwitchViewModel>(
-      child: Consumer<ThemeSwitchViewModel>(
-        builder: (context, ThemeSwitchViewModel themeNotifier, child) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: 'MoviDeck',
-            theme: themeNotifier.isDark
-                ? MoviDeckTheme.dark()
-                : MoviDeckTheme.light(),
-            home: ChangeNotifierProvider<BottomNavigationBarViewModel>(
-              child: const BottomNavigationBarWidget(),
-              create: (BuildContext context) => BottomNavigationBarViewModel(),
-            ),
-          );
-        },
-      ),
-      create: (BuildContext context) => ThemeSwitchViewModel(),
+  Widget build(BuildContext context, WidgetRef ref) {
+    final _themeNotifier = ref.watch(themeNotifierProvider.notifier);
+
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'MoviDeck',
+      theme:
+          _themeNotifier.isDark ? MoviDeckTheme.dark() : MoviDeckTheme.light(),
+      home: const BottomNavigationBarWidget(),
     );
   }
 }

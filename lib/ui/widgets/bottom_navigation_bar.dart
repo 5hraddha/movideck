@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../business_logic/view_models/viewmodels.dart';
 import '../../ui/views/views.dart';
 import '../../ui/widgets/widgets.dart';
 
-class BottomNavigationBarWidget extends StatelessWidget {
+class BottomNavigationBarWidget extends ConsumerWidget {
   const BottomNavigationBarWidget({super.key});
 
   // List of views to show in BottomNavigationBar
@@ -17,15 +17,15 @@ class BottomNavigationBarWidget extends StatelessWidget {
   ];
 
   @override
-  Widget build(BuildContext context) {
-    final bottomNavigationBarProvider =
-        Provider.of<BottomNavigationBarViewModel>(context);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final _bottomNavigationBarNotifier =
+        ref.watch(bottomNavigationBarNotifierProvider.notifier);
     return SafeArea(
       child: Scaffold(
         appBar: _buildAppBar(),
-        body: pages[bottomNavigationBarProvider.currentSelectedIndex],
+        body: pages[_bottomNavigationBarNotifier.currentSelectedIndex],
         bottomNavigationBar:
-            _buildBottomNavigationBar(bottomNavigationBarProvider),
+            _buildBottomNavigationBar(_bottomNavigationBarNotifier, ref),
       ),
     );
   }
@@ -47,11 +47,16 @@ class BottomNavigationBarWidget extends StatelessWidget {
   }
 
   // Build BottomNavigationBar
-  Widget _buildBottomNavigationBar(BottomNavigationBarViewModel provider) {
+  Widget _buildBottomNavigationBar(
+      BottomNavigationBarProvider _bottomNavigationBarNotifier, WidgetRef ref) {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
-      currentIndex: provider.currentSelectedIndex,
-      onTap: provider.updateSelectedIndex,
+      currentIndex: _bottomNavigationBarNotifier.currentSelectedIndex,
+      onTap: (value) {
+        ref
+            .read(bottomNavigationBarNotifierProvider.notifier)
+            .updateSelectedIndex(value);
+      },
       items: [
         const BottomNavigationBarItem(
           icon: Icon(Icons.home),

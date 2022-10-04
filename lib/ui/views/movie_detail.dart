@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../business_logic/view_models/viewmodels.dart';
-import '../../services/service_locator.dart';
 import '../movideck_theme.dart';
 import '../widgets/widgets.dart';
 
 class MovieDetail extends StatelessWidget {
   final int movieId;
   final String posterUrl;
-  final MovieDetailViewModel model = serviceLocator<MovieDetailViewModel>();
+  final MovieDetailViewModel model = MovieDetailViewModel();
 
   MovieDetail({
     super.key,

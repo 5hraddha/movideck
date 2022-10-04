@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
-import '../../services/service_locator.dart';
 import '../../services/web_api/web_api.dart';
+import '../../services/web_api/web_api_implementation.dart';
 import '../models/models.dart';
 import 'movie_viewmodel.dart';
 
 class HomeViewModel extends ChangeNotifier {
-  final WebApi _webApi = serviceLocator<WebApi>();
+  final WebApi _webApi = WebApiImplementation();
 
   List<MovieViewModel> _nowPlayingMovies = [];
   List<MovieViewModel> _popularMovies = [];

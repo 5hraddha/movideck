@@ -1,15 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class MoviDeckTheme extends ChangeNotifier {
-  // Current theme of the app
-  bool isDarkTheme = false;
-
-  void toggleCurrentTheme() {
-    isDarkTheme = !isDarkTheme;
-    notifyListeners();
-  }
-
+class MoviDeckTheme {
   // Light Text Theme
   static TextTheme lightTextTheme = TextTheme(
     bodyText1: GoogleFonts.roboto(

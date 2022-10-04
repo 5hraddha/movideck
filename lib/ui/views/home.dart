@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../business_logic/view_models/viewmodels.dart';
-import '../../services/service_locator.dart';
 import '../views/views.dart';
 import '../widgets/widgets.dart';
 import '../movideck_theme.dart';
 
-class Home extends StatelessWidget {
+class Home extends ConsumerWidget {
   Home({super.key});
-  final HomeViewModel model = serviceLocator<HomeViewModel>();
+  final HomeViewModel model = HomeViewModel();
 
   // List of section titles to display on the home view
   static const List<String> sectionTitles = [
@@ -20,14 +19,14 @@ class Home extends StatelessWidget {
   ];
 
   @override
-  Widget build(BuildContext context) {
-    final themeSwitchProvider = Provider.of<ThemeSwitchViewModel>(context);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final _themeNotifier = ref.watch(themeNotifierProvider.notifier);
     return ListView.builder(
       itemCount: sectionTitles.length,
       itemBuilder: (context, index) {
         return _buildMoviesSection(
             context,
-            themeSwitchProvider,
+            _themeNotifier,
             _getLoadDataMethod(model, sectionTitles[index]),
             sectionTitles[index]);
       },
@@ -37,7 +36,7 @@ class Home extends StatelessWidget {
   //Build each section of the home view
   Widget _buildMoviesSection(
     BuildContext context,
-    ThemeSwitchViewModel provider,
+    ThemeSwitchProvider themeNotifier,
     Function loadDataMethod,
     String sectionTitle,
   ) {
@@ -52,7 +51,7 @@ class Home extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            _buildSectionTitle(provider, sectionTitle),
+            _buildSectionTitle(themeNotifier, sectionTitle),
             const SizedBox(height: 10.0),
             _buildSectionHorizontalList(currentMoviesModel),
             const SizedBox(height: 10.0),
@@ -64,12 +63,12 @@ class Home extends StatelessWidget {
 
   // Build section title
   Widget _buildSectionTitle(
-      ThemeSwitchViewModel provider, String sectionTitle) {
+      ThemeSwitchProvider themeNotifier, String sectionTitle) {
     return Padding(
       padding: const EdgeInsets.only(left: 18.0, top: 10.0),
       child: Text(
         '$sectionTitle',
-        style: provider.isDark
+        style: themeNotifier.isDark
             ? MoviDeckTheme.darkTextTheme.headline2
             : MoviDeckTheme.lightTextTheme.headline2,
       ),
