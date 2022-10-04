@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../business_logic/models/models.dart';
 import './web_api.dart';
 
@@ -52,3 +54,6 @@ class WebApiImplementation implements WebApi {
     return movieDetail;
   }
 }
+
+//Web Api service provider
+final webApiProvider = Provider<WebApi>((ref) => WebApiImplementation());
