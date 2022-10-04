@@ -1,19 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class BottomNavigationBarProvider extends StateNotifier<int> {
-  int _selectedIndex = 0;
-
-  BottomNavigationBarProvider(super.state);
-
-  //Get current selected screen index
-  int get currentSelectedIndex => _selectedIndex;
-
-  //Update selected screen index
-  void updateSelectedIndex(int newIndex) {
-    _selectedIndex = newIndex;
-  }
+class BottomNavigationBarProvider {
+  BottomNavigationBarProvider({required this.selectedIndex});
+  int selectedIndex;
 }
 
 final bottomNavigationBarNotifierProvider =
-    StateNotifierProvider<BottomNavigationBarProvider, int>(
-        (_) => BottomNavigationBarProvider(0));
+    StateProvider<BottomNavigationBarProvider>(
+        (ref) => BottomNavigationBarProvider(selectedIndex: 0));

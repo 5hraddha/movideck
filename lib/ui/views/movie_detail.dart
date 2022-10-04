@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../business_logic/view_models/viewmodels.dart';
-import '../movideck_theme.dart';
 import '../widgets/widgets.dart';
+import '../movideck_theme.dart';
 
 class MovieDetail extends StatelessWidget {
   final int movieId;
@@ -21,16 +21,7 @@ class MovieDetail extends StatelessWidget {
     return Scaffold(
       extendBody: true,
       backgroundColor: const Color(0xFFB5251B),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.black,
-        splashColor: const Color(0xFFB5251B),
-        child: const Icon(
-          Icons.add,
-          color: Colors.white,
-          size: 25.0,
-        ),
-        onPressed: () {},
-      ),
+      floatingActionButton: _buildFloatingActionButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       body: FutureBuilder(
         future: model.loadData(movieId),
@@ -44,6 +35,21 @@ class MovieDetail extends StatelessWidget {
     );
   }
 
+  // Build floating action button to add a movie as favorite
+  Widget _buildFloatingActionButton() {
+    return FloatingActionButton(
+      backgroundColor: Colors.black,
+      splashColor: const Color(0xFFB5251B),
+      child: const Icon(
+        Icons.add,
+        color: Colors.white,
+        size: 25.0,
+      ),
+      onPressed: () {},
+    );
+  }
+
+  // Build body for the screen
   Widget _buildBody(MovieDetailViewModel model, String posterUrl) {
     return CustomScrollView(
       physics: const BouncingScrollPhysics(),

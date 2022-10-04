@@ -3,9 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../business_logic/view_models/viewmodels.dart';
-import 'ui/widgets/widgets.dart';
-import 'ui/movideck_theme.dart';
+import 'app.dart';
 
 Future main() async {
   // Load .env file
@@ -21,20 +19,4 @@ Future main() async {
     ),
   );
   runApp(const ProviderScope(child: App()));
-}
-
-class App extends ConsumerWidget {
-  const App({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final _themeNotifier = ref.watch(themeNotifierProvider);
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'MoviDeck',
-      theme:
-          _themeNotifier.isDark ? MoviDeckTheme.dark() : MoviDeckTheme.light(),
-      home: const BottomNavigationBarWidget(),
-    );
-  }
 }
