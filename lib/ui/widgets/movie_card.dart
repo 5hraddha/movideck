@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../business_logic/view_models/viewmodels.dart';
-import '../widgets/circular_rating_indicator.dart';
+import '../../business_logic/utils/helper_functions.dart';
+import '../widgets/widgets.dart';
 import '../movideck_theme.dart';
 
 class MovieCard extends StatelessWidget {
@@ -99,12 +100,21 @@ class MovieCard extends StatelessWidget {
 
   // Build the card's subtitle
   Widget _buildSubtitle(String releaseDate, String language) {
-    final year = _getYear(releaseDate);
-    return Text(
-      '$year | $language',
-      maxLines: 1,
-      overflow: TextOverflow.ellipsis,
-      style: MoviDeckTheme.lightTextTheme.headline6,
+    final year = getYear(releaseDate);
+    return Row(
+      children: [
+        //Year of Release
+        Text(
+          year.toString(),
+          style: MoviDeckTheme.lightTextTheme.headline6,
+        ),
+        const ItemSeparator(separatorColor: Color(0xFFFFFFFF)),
+        //Language
+        Text(
+          language.toString(),
+          style: MoviDeckTheme.lightTextTheme.headline6,
+        ),
+      ],
     );
   }
 
@@ -128,10 +138,5 @@ class MovieCard extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  // Get the year alone from the movie release date
-  String _getYear(String date) {
-    return date.substring(0, 4);
   }
 }

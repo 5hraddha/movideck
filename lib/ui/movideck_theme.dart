@@ -17,7 +17,7 @@ class MoviDeckTheme {
     headline1: GoogleFonts.acme(
       fontSize: 30.0,
       fontWeight: FontWeight.normal,
-      color: const Color(0xFF191919),
+      color: const Color(0xFFB5251B),
     ),
     headline2: GoogleFonts.acme(
       fontSize: 18.0,
