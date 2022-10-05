@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import '../models/movie.dart';
 
 class MovieViewModel {
@@ -11,4 +13,6 @@ class MovieViewModel {
       'https://image.tmdb.org/t/p/original/${movie.posterPath}';
   String get releaseDate => movie.releaseDate;
   String get language => movie.originalLanguage;
+  num? get voteAverage => movie.voteAverage;
+  Color get movieRatingColor => Movie.getMovieRatingColor(movie.voteAverage);
 }

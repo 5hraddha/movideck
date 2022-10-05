@@ -1,4 +1,7 @@
+import 'package:flutter/material.dart';
+
 import './movie_language.dart';
+import './movie_rating_status.dart';
 
 class Movie {
   final int id;
@@ -12,7 +15,7 @@ class Movie {
   final String title;
   final bool video;
   final int voteCount;
-  final String voteAverage;
+  final num? voteAverage;
 
   Movie(
       {required this.id,
@@ -40,7 +43,7 @@ class Movie {
         title = json['title'] as String,
         video = json['video'] as bool,
         voteCount = json['vote_count'] as int,
-        voteAverage = json['vote_average'].toString();
+        voteAverage = json['vote_average'] as num?;
 
   static MovieLanguage _getLanguage(String code) {
     switch (code) {
@@ -70,6 +73,18 @@ class Movie {
         return MovieLanguage.ta;
       default:
         return MovieLanguage.en;
+    }
+  }
+
+  // Get the color to show movie rating in the movie card
+  static Color getMovieRatingColor(num? voteAverage) {
+    final userRating = ((voteAverage ?? 0) * 10).ceil();
+    if (userRating >= 70) {
+      return MovieRatingStatus.good.color;
+    } else if (userRating < 70 && userRating >= 50) {
+      return MovieRatingStatus.ok.color;
+    } else {
+      return MovieRatingStatus.bad.color;
     }
   }
 

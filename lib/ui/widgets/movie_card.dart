@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../business_logic/view_models/viewmodels.dart';
+import '../widgets/circular_rating_indicator.dart';
 import '../movideck_theme.dart';
 
 class MovieCard extends StatelessWidget {
@@ -29,6 +30,15 @@ class MovieCard extends StatelessWidget {
                 _buildDetails(movie.title, movie.releaseDate, movie.language),
               ],
             ),
+            Positioned(
+              top: 118.0,
+              right: 10.0,
+              child: CircularRatingIndicator(
+                circleSize: 32.0,
+                userRating: movie.voteAverage,
+                ratingColor: movie.movieRatingColor,
+              ),
+            ),
             _buildAddFavouriteButton(),
           ],
         ),
@@ -45,7 +55,7 @@ class MovieCard extends StatelessWidget {
         image: DecorationImage(
           fit: BoxFit.cover,
           colorFilter: ColorFilter.mode(
-              Colors.black.withOpacity(0.8), BlendMode.dstATop),
+              Colors.black.withOpacity(0.9), BlendMode.dstATop),
           image: NetworkImage(imageUrl!),
         ),
       ),
@@ -64,12 +74,15 @@ class MovieCard extends StatelessWidget {
             bottomLeft: Radius.circular(10.0),
             bottomRight: Radius.circular(10.0)),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          _buildTitle(title),
-          _buildSubtitle(releaseDate, language),
-        ],
+      child: Container(
+        margin: const EdgeInsets.only(right: 35.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            _buildTitle(title),
+            _buildSubtitle(releaseDate, language),
+          ],
+        ),
       ),
     );
   }
@@ -103,7 +116,8 @@ class MovieCard extends StatelessWidget {
         width: 30.0,
         height: 30.0,
         decoration: BoxDecoration(
-            color: Colors.black, borderRadius: BorderRadius.circular(50.0)),
+            color: const Color(0xFF191919),
+            borderRadius: BorderRadius.circular(50.0)),
         child: IconButton(
           icon: const Icon(
             Icons.add,
