@@ -3,12 +3,9 @@ import './movie_language.dart';
 class MovieDetail {
   final int id;
   final String title;
-  final String? backdropPath;
-  final String? originalTitle;
   final String originalLanguage;
   final String overview;
   final String? posterPath;
-  final String? releaseDate;
   final int? runtime;
   final num? voteAverage;
   final int? voteCount;
@@ -16,12 +13,9 @@ class MovieDetail {
   MovieDetail({
     required this.id,
     required this.title,
-    required this.backdropPath,
-    required this.originalTitle,
     required this.originalLanguage,
     required this.overview,
     required this.posterPath,
-    required this.releaseDate,
     required this.runtime,
     required this.voteAverage,
     required this.voteCount,
@@ -30,13 +24,10 @@ class MovieDetail {
   MovieDetail.fromJson(Map<String, dynamic> json)
       : id = json['id'] as int,
         title = json['title'] as String,
-        backdropPath = json['backdropPath'] as String?,
-        originalTitle = json['originalTitle'] as String?,
         originalLanguage =
             MovieDetail.getLanguage(json['original_language']).name,
         overview = json['overview'] as String,
         posterPath = json['posterPath'] as String?,
-        releaseDate = json['releaseDate'] as String?,
         runtime = json['runtime'] as int?,
         voteAverage = json['voteAverage'] as num?,
         voteCount = json['voteCount'] as int?;

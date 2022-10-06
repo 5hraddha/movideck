@@ -64,7 +64,7 @@ class MovieCard extends StatelessWidget {
   }
 
   // Build the card's details text section
-  Widget _buildDetails(String title, String releaseDate, String language) {
+  Widget _buildDetails(String title, String? releaseDate, String language) {
     return Container(
       height: 56.0,
       width: double.infinity,
@@ -99,8 +99,8 @@ class MovieCard extends StatelessWidget {
   }
 
   // Build the card's subtitle
-  Widget _buildSubtitle(String releaseDate, String language) {
-    final year = getYear(releaseDate);
+  Widget _buildSubtitle(String? releaseDate, String language) {
+    final year = getYear(releaseDate!);
     return Row(
       children: [
         //Year of Release

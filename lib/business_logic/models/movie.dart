@@ -11,7 +11,7 @@ class Movie {
   final String overview;
   final double popularity;
   final String? posterPath;
-  final String releaseDate;
+  final String? releaseDate;
   final String title;
   final bool video;
   final int voteCount;
@@ -39,7 +39,7 @@ class Movie {
         overview = json['overview'] as String,
         popularity = json['popularity'] as double,
         posterPath = json['poster_path'] as String?,
-        releaseDate = json['release_date'] as String,
+        releaseDate = json['release_date'] as String?,
         title = json['title'] as String,
         video = json['video'] as bool,
         voteCount = json['vote_count'] as int,

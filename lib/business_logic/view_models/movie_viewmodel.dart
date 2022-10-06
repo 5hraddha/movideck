@@ -1,4 +1,4 @@
-import 'dart:ui';
+import 'package:flutter/material.dart';
 
 import '../models/movie.dart';
 
@@ -11,7 +11,7 @@ class MovieViewModel {
   String get title => movie.title;
   String get posterUrl =>
       'https://image.tmdb.org/t/p/original/${movie.posterPath}';
-  String get releaseDate => movie.releaseDate;
+  String? get releaseDate => movie.releaseDate;
   String get language => movie.originalLanguage;
   num? get voteAverage => movie.voteAverage;
   Color get movieRatingColor => Movie.getMovieRatingColor(movie.voteAverage);

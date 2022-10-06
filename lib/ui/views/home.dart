@@ -88,6 +88,9 @@ class Home extends ConsumerWidget {
                   builder: (context) => MovieDetail(
                     movieId: movieViewModelData[index].id,
                     posterUrl: movieViewModelData[index].posterUrl,
+                    userRating: movieViewModelData[index].voteAverage,
+                    ratingColor: movieViewModelData[index].movieRatingColor,
+                    releaseDate: movieViewModelData[index].releaseDate,
                   ),
                 ),
               );

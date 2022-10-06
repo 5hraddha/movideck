@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../business_logic/utils/helper_functions.dart';
 import '../../business_logic/view_models/viewmodels.dart';
-import '../widgets/item_separator.dart';
 import '../widgets/widgets.dart';
 import '../movideck_theme.dart';
 
 class MovieDetail extends ConsumerWidget {
   final int movieId;
   final String posterUrl;
+  final num? userRating;
+  final Color ratingColor;
+  final String? releaseDate;
 
   const MovieDetail({
     super.key,
     required this.movieId,
     required this.posterUrl,
+    required this.userRating,
+    required this.ratingColor,
+    required this.releaseDate,
   });
 
   @override
@@ -39,8 +45,13 @@ class MovieDetail extends ConsumerWidget {
               width: double.infinity,
               height: 400.0,
               child: _movieDetailDataProvider.when(
-                data: (data) =>
-                    _buildDetails(_themeNotifier, getMovieDetail(data)),
+                data: (data) => _buildDetails(
+                  _themeNotifier,
+                  getMovieDetail(data),
+                  userRating,
+                  ratingColor,
+                  releaseDate,
+                ),
                 error: (error, stackTrace) => Text(error.toString()),
                 loading: () => const SizedBox.shrink(),
               ),
@@ -67,40 +78,70 @@ class MovieDetail extends ConsumerWidget {
 
   //Build details section
   Widget _buildDetails(
-      ThemeSwitchProvider _themeNotifier, MovieDetailDataProvider movieDetail) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        _buildTitle(_themeNotifier, movieDetail.title),
-        const SizedBox(height: 6.0),
-        _buildSubtitle(_themeNotifier, '2020', '2h 9min', 'Fantasy'),
-        const SizedBox(height: 20.0),
-        Text(
-          '${movieDetail.overview}',
-          style: _themeNotifier.isDark
-              ? MoviDeckTheme.darkTextTheme.bodyText1
-              : MoviDeckTheme.lightTextTheme.bodyText1,
+    ThemeSwitchProvider _themeNotifier,
+    MovieDetailDataProvider movieDetail,
+    num? userRating,
+    Color ratingColor,
+    String? releaseDate,
+  ) {
+    return Stack(
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            _buildTitle(_themeNotifier, movieDetail.title),
+            const SizedBox(height: 6.0),
+            _buildSubtitle(
+              _themeNotifier,
+              releaseDate,
+              movieDetail.runtime,
+              'Fantasy',
+            ),
+            const SizedBox(height: 20.0),
+            Text(
+              '${movieDetail.overview}',
+              style: _themeNotifier.isDark
+                  ? MoviDeckTheme.darkTextTheme.bodyText1
+                  : MoviDeckTheme.lightTextTheme.bodyText1,
+            ),
+          ],
+        ),
+        Positioned(
+          top: 0.0,
+          right: 0.0,
+          child: CircularRatingIndicator(
+            circleSize: 40.0,
+            userRating: userRating,
+            ratingColor: ratingColor,
+          ),
         ),
       ],
     );
   }
 
   Widget _buildTitle(ThemeSwitchProvider _themeNotifier, String title) {
-    return Text(
-      '$title',
-      style: _themeNotifier.isDark
-          ? MoviDeckTheme.darkTextTheme.headline1
-          : MoviDeckTheme.lightTextTheme.headline1,
+    return Container(
+      margin: const EdgeInsets.only(right: 35.0),
+      child: Text(
+        '$title',
+        style: _themeNotifier.isDark
+            ? MoviDeckTheme.darkTextTheme.headline1
+            : MoviDeckTheme.lightTextTheme.headline1,
+      ),
     );
   }
 
-  Widget _buildSubtitle(ThemeSwitchProvider _themeNotifier, String year,
-      String runtime, String genre) {
+  Widget _buildSubtitle(
+    ThemeSwitchProvider _themeNotifier,
+    String? releaseDate,
+    int? runtime,
+    String genre,
+  ) {
     return Row(
       children: [
         //Year of Release
         Text(
-          year.toString(),
+          getYear(releaseDate),
           style: _themeNotifier.isDark
               ? MoviDeckTheme.darkTextTheme.headline4
               : MoviDeckTheme.lightTextTheme.headline4,
@@ -108,7 +149,7 @@ class MovieDetail extends ConsumerWidget {
         const ItemSeparator(separatorColor: Color(0xFFB5251B)),
         //Runtime
         Text(
-          runtime.toString(),
+          getRuntime(runtime),
           style: _themeNotifier.isDark
               ? MoviDeckTheme.darkTextTheme.headline4
               : MoviDeckTheme.lightTextTheme.headline4,

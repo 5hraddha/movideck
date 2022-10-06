@@ -11,7 +11,6 @@ class MovieDetailDataProvider {
   int get id => movieDetail.id;
   String get title => movieDetail.title;
   String get overview => movieDetail.overview;
-  String? get releaseDate => movieDetail.releaseDate;
   String get language => movieDetail.originalLanguage;
   int? get runtime => movieDetail.runtime;
 }
