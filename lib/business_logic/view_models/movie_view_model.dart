@@ -15,4 +15,5 @@ class MovieViewModel {
   String get language => movie.originalLanguage;
   num? get voteAverage => movie.voteAverage;
   Color get movieRatingColor => Movie.getMovieRatingColor(movie.voteAverage);
+  List<int?>? get genre_ids => movie.genre_ids;
 }

@@ -5,45 +5,37 @@ import './movie_rating_status.dart';
 
 class Movie {
   final int id;
-  final String? backdropPath;
   final String originalLanguage;
-  final String originalTitle;
-  final String overview;
-  final double popularity;
   final String? posterPath;
   final String? releaseDate;
   final String title;
-  final bool video;
-  final int voteCount;
   final num? voteAverage;
+  final List<int?> genre_ids;
 
-  Movie(
-      {required this.id,
-      required this.backdropPath,
-      required this.originalLanguage,
-      required this.originalTitle,
-      required this.overview,
-      required this.popularity,
-      required this.posterPath,
-      required this.releaseDate,
-      required this.title,
-      required this.video,
-      required this.voteCount,
-      required this.voteAverage});
+  Movie({
+    required this.id,
+    required this.originalLanguage,
+    required this.posterPath,
+    required this.releaseDate,
+    required this.title,
+    required this.voteAverage,
+    required this.genre_ids,
+  });
 
   Movie.fromJson(Map<String, dynamic> json)
       : id = json['id'] as int,
-        backdropPath = json['backdrop_path'] as String?,
         originalLanguage = Movie._getLanguage(json['original_language']).name,
-        originalTitle = json['original_title'] as String,
-        overview = json['overview'] as String,
-        popularity = json['popularity'] as double,
         posterPath = json['poster_path'] as String?,
         releaseDate = json['release_date'] as String?,
         title = json['title'] as String,
-        video = json['video'] as bool,
-        voteCount = json['vote_count'] as int,
-        voteAverage = json['vote_average'] as num?;
+        voteAverage = json['vote_average'] as num?,
+        genre_ids = [] {
+    if (json['genre_ids'] != null) {
+      for (final item in json['genre_ids']) {
+        genre_ids.add(item as int);
+      }
+    }
+  }
 
   static MovieLanguage _getLanguage(String code) {
     switch (code) {

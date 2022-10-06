@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'business_logic/view_models/viewmodels.dart';
+import 'business_logic/view_models/view_models.dart';
 import 'business_logic/utils/constants.dart';
 import 'ui/widgets/widgets.dart';
 import 'ui/movideck_theme.dart';

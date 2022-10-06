@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../business_logic/view_models/viewmodels.dart';
+import '../../business_logic/view_models/view_models.dart';
 import '../views/views.dart';
 import '../widgets/widgets.dart';
 import '../movideck_theme.dart';
@@ -65,7 +65,7 @@ class Home extends ConsumerWidget {
       padding: const EdgeInsets.only(left: 18.0, top: 10.0),
       child: Text(
         '$sectionTitle',
-        style: themeNotifier.isDark ?? false
+        style: themeNotifier.isDark
             ? MoviDeckTheme.darkTextTheme.headline2
             : MoviDeckTheme.lightTextTheme.headline2,
       ),

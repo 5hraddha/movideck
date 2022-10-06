@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../services/web_api/web_api_implementation.dart';
 import '../models/models.dart';
-import './movie_viewmodel.dart';
+import 'movie_view_model.dart';
 
 List<MovieViewModel> getMovies(List<Movie> futureMovies) {
   return futureMovies.map((item) => MovieViewModel(movie: item)).toList();

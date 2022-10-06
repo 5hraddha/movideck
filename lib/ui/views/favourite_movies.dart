@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../business_logic/view_models/viewmodels.dart';
+import '../../business_logic/view_models/view_models.dart';
 import '../movideck_theme.dart';
 
 class FavouriteMovies extends ConsumerWidget {
