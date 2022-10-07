@@ -45,9 +45,10 @@ class MovieDetail extends ConsumerWidget {
             child: Container(
               padding: const EdgeInsets.all(28.0),
               width: double.infinity,
-              height: 400.0,
+              height: 600.0,
               child: _movieDetailDataProvider.when(
                 data: (data) => _buildDetails(
+                  ref,
                   _themeNotifier,
                   getMovieDetail(data),
                 ),
@@ -77,6 +78,7 @@ class MovieDetail extends ConsumerWidget {
 
   //Build details section
   Widget _buildDetails(
+    WidgetRef ref,
     ThemeSwitchProvider _themeNotifier,
     MovieDetailDataProvider movieDetail,
   ) {
@@ -93,12 +95,11 @@ class MovieDetail extends ConsumerWidget {
               movieDetail.runtime,
             ),
             const SizedBox(height: 20.0),
-            Text(
-              '${movieDetail.overview}',
-              style: _themeNotifier.isDark
-                  ? MoviDeckTheme.darkTextTheme.bodyText1
-                  : MoviDeckTheme.lightTextTheme.bodyText1,
-            ),
+            _buildOverview(_themeNotifier, movieDetail.overview),
+            const SizedBox(height: 20.0),
+            _buildSectionTitle(_themeNotifier, "Movie's Cast"),
+            const SizedBox(height: 6.0),
+            _buildCastSectionHorizontalList(ref, movieDetail.id),
           ],
         ),
         Positioned(
@@ -172,6 +173,50 @@ class MovieDetail extends ConsumerWidget {
           ],
         ),
       ],
+    );
+  }
+
+  // Build section title
+  Widget _buildSectionTitle(
+      ThemeSwitchProvider themeNotifier, String sectionTitle) {
+    return Text(
+      '$sectionTitle',
+      style: themeNotifier.isDark
+          ? MoviDeckTheme.darkTextTheme.headline2
+          : MoviDeckTheme.lightTextTheme.headline2,
+    );
+  }
+
+  Widget _buildOverview(
+    ThemeSwitchProvider _themeNotifier,
+    String overview,
+  ) {
+    return Text(
+      '$overview',
+      style: _themeNotifier.isDark
+          ? MoviDeckTheme.darkTextTheme.bodyText1
+          : MoviDeckTheme.lightTextTheme.bodyText1,
+    );
+  }
+
+  Widget _buildCastSectionHorizontalList(WidgetRef ref, int movieId) {
+    final _castDataProvider = ref.watch(castDataProvider(movieId));
+    return _castDataProvider.when(
+      data: (data) {
+        final movieCastList = getCasts(data);
+        return SizedBox(
+          height: 200.0,
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            itemCount: movieCastList.length,
+            separatorBuilder: (context, index) => const SizedBox(width: 1.0),
+            itemBuilder: (context, index) =>
+                CastCard(cast: movieCastList[index]),
+          ),
+        );
+      },
+      error: (error, stackTrace) => Text(error.toString()),
+      loading: () => const SizedBox.shrink(),
     );
   }
 }

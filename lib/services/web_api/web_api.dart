@@ -7,4 +7,5 @@ abstract class WebApi {
   Future<List<Movie>> getUpcomingMovies();
   Future<MovieDetail> getMovieDetail(int movieId);
   Future<List<Genre>> getGenres();
+  Future<List<Cast>> getCasts(int movieId);
 }

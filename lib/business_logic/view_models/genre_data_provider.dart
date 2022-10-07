@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../services/web_api/web_api_implementation.dart';
-import '../models/models.dart';
+import '../models/genre.dart';
 
 class GenreDataProvider {
   final Genre genre;

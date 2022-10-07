@@ -65,6 +65,16 @@ class WebApiImplementation implements WebApi {
         genres.map((genre) => Genre.fromJson(genre)).toList();
     return genreList;
   }
+
+  @override
+  Future<List<Cast>> getCasts(int movieId) async {
+    final url = '$_baseUrl/movie/$movieId/credits?api_key=$_apiKey';
+    final response = await _dio.get(url);
+    final casts = response.data['cast'] as List;
+    final List<Cast> castList =
+        casts.map((cast) => Cast.fromJson(cast)).toList();
+    return castList;
+  }
 }
 
 //Web Api service provider

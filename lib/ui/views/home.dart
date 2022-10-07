@@ -99,7 +99,7 @@ class Home extends ConsumerWidget {
             onTap: () {
               //Get the genres of the movie
               final movieGenreList = _getMovieGenres(
-                  genreList, movieViewModelData[index].genre_ids);
+                  genreList, movieViewModelData[index].genreIds);
               Navigator.push(
                 context,
                 MaterialPageRoute(

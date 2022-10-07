@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../services/web_api/web_api_implementation.dart';
-import '../models/models.dart';
+import '../models/movie.dart';
 import 'movie_view_model.dart';
 
 List<MovieViewModel> getMovies(List<Movie> futureMovies) {
