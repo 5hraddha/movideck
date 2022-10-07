@@ -89,6 +89,7 @@ class MovieDetail extends ConsumerWidget {
             const SizedBox(height: 6.0),
             _buildSubtitle(
               _themeNotifier,
+              movieDetail.language,
               movieDetail.runtime,
             ),
             const SizedBox(height: 20.0),
@@ -127,6 +128,7 @@ class MovieDetail extends ConsumerWidget {
 
   Widget _buildSubtitle(
     ThemeSwitchProvider _themeNotifier,
+    String language,
     int? runtime,
   ) {
     return Wrap(
@@ -135,6 +137,14 @@ class MovieDetail extends ConsumerWidget {
         //Year of Release
         Text(
           getYear(releaseDate),
+          style: _themeNotifier.isDark
+              ? MoviDeckTheme.darkTextTheme.headline4
+              : MoviDeckTheme.lightTextTheme.headline4,
+        ),
+        const ItemSeparator(separatorColor: Color(0xFFB5251B)),
+        //Language
+        Text(
+          language,
           style: _themeNotifier.isDark
               ? MoviDeckTheme.darkTextTheme.headline4
               : MoviDeckTheme.lightTextTheme.headline4,
