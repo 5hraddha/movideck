@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CustomAppBar extends StatelessWidget {
+import '../../business_logic/view_models/view_models.dart';
+import '../movideck_theme.dart';
+
+class CustomAppBar extends ConsumerWidget {
   final String imagePath;
   final bool centerTitle;
 
@@ -11,7 +15,8 @@ class CustomAppBar extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final _themeNotifier = ref.watch(themeNotifierProvider);
     return SliverAppBar(
       title: Image.asset(
         'assets/images/logo.png',
@@ -21,7 +26,9 @@ class CustomAppBar extends StatelessWidget {
       iconTheme: const IconThemeData(
         color: Color(0xFFC84B31),
       ),
-      backgroundColor: Colors.grey,
+      backgroundColor: _themeNotifier.isDark
+          ? MoviDeckTheme.dark().scaffoldBackgroundColor
+          : MoviDeckTheme.light().scaffoldBackgroundColor,
       centerTitle: centerTitle,
       expandedHeight: 400.0,
       pinned: true,

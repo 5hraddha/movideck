@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../business_logic/view_models/genre_data_provider.dart';
 import '../../business_logic/view_models/view_models.dart';
 import '../views/views.dart';
 import '../widgets/widgets.dart';

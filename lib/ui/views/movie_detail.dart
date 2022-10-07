@@ -97,7 +97,7 @@ class MovieDetail extends ConsumerWidget {
             const SizedBox(height: 20.0),
             _buildOverview(_themeNotifier, movieDetail.overview),
             const SizedBox(height: 20.0),
-            _buildSectionTitle(_themeNotifier, "Movie's Cast"),
+            _buildSectionTitle(_themeNotifier, 'Cast'),
             const SizedBox(height: 6.0),
             _buildCastSectionHorizontalList(ref, movieDetail.id),
           ],
