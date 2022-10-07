@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../business_logic/view_models/genre_data_provider.dart';
 import '../../business_logic/view_models/view_models.dart';
 import '../views/views.dart';
 import '../widgets/widgets.dart';
@@ -21,6 +23,7 @@ class Home extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     //Providers
     final _themeNotifier = ref.watch(themeNotifierProvider);
+    final _genresDataProvider = ref.watch(genreDataProvider);
     final _nowPlayingMoviesDataProvider =
         ref.watch(nowPlayingMoviesDataProvider);
     final _popularMoviesDataProvider = ref.watch(popularMoviesDataProvider);
@@ -33,28 +36,37 @@ class Home extends ConsumerWidget {
       _upcomingMoviesDataProvider,
     ];
 
-    return ListView.builder(
-      itemCount: sectionTitles.length,
-      itemBuilder: (context, index) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            //Build section title
-            _buildSectionTitle(_themeNotifier, sectionTitles[index]),
-            const SizedBox(height: 10.0),
-            //Build the horizontal scrollable section list
-            _dataProviders[index].when(
-              data: (data) {
-                final movieViewModelData = getMovies(data);
-                return _buildSectionHorizontalList(movieViewModelData);
-              },
-              error: (error, stackTrace) => Text(error.toString()),
-              loading: () => const SizedBox.shrink(),
-            ),
-            const SizedBox(height: 10.0),
-          ],
-        );
-      },
+    return Container(
+      child: _genresDataProvider.when(
+        data: (data) {
+          final genreList = getGenres(data);
+          return ListView.builder(
+              itemCount: sectionTitles.length,
+              itemBuilder: (context, index) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    //Build section title
+                    _buildSectionTitle(_themeNotifier, sectionTitles[index]),
+                    const SizedBox(height: 10.0),
+                    //Build the horizontal scrollable section list
+                    _dataProviders[index].when(
+                      data: (data) {
+                        final movieViewModelData = getMovies(data);
+                        return _buildSectionHorizontalList(
+                            movieViewModelData, genreList);
+                      },
+                      error: (error, stackTrace) => Text(error.toString()),
+                      loading: () => const SizedBox.shrink(),
+                    ),
+                    const SizedBox(height: 10.0),
+                  ],
+                );
+              });
+        },
+        error: (error, stackTrace) => Text(error.toString()),
+        loading: () => const SizedBox.shrink(),
+      ),
     );
   }
 
@@ -73,7 +85,10 @@ class Home extends ConsumerWidget {
   }
 
   //Build the horizontal scrollable section list
-  Widget _buildSectionHorizontalList(List<MovieViewModel> movieViewModelData) {
+  Widget _buildSectionHorizontalList(
+    List<MovieViewModel> movieViewModelData,
+    List<GenreDataProvider> genreList,
+  ) {
     return SizedBox(
       height: 200.0,
       child: ListView.separated(
@@ -82,6 +97,9 @@ class Home extends ConsumerWidget {
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
+              //Get the genres of the movie
+              final movieGenreList = _getMovieGenres(
+                  genreList, movieViewModelData[index].genre_ids);
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -91,6 +109,7 @@ class Home extends ConsumerWidget {
                     userRating: movieViewModelData[index].voteAverage,
                     ratingColor: movieViewModelData[index].movieRatingColor,
                     releaseDate: movieViewModelData[index].releaseDate,
+                    movieGenreList: movieGenreList,
                   ),
                 ),
               );
@@ -101,5 +120,19 @@ class Home extends ConsumerWidget {
         separatorBuilder: (context, index) => const SizedBox(width: 1.0),
       ),
     );
+  }
+
+  //Get the genres of the movie
+  List<String?> _getMovieGenres(
+      List<GenreDataProvider> genreList, List<int?>? genre_ids) {
+    final List<String?> movieGenreList = [];
+    for (final movieGenreId in genre_ids!) {
+      for (final genreData in genreList) {
+        if (movieGenreId == genreData.id) {
+          movieGenreList.add(genreData.name);
+        }
+      }
+    }
+    return movieGenreList;
   }
 }

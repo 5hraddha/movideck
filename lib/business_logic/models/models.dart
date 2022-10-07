@@ -1,3 +1,4 @@
+export './genre.dart';
 export './movie.dart';
 export './movie_detail.dart';
 export './movie_language.dart';

@@ -12,6 +12,7 @@ class MovieDetail extends ConsumerWidget {
   final num? userRating;
   final Color ratingColor;
   final String? releaseDate;
+  final List<String?> movieGenreList;
 
   const MovieDetail({
     super.key,
@@ -20,6 +21,7 @@ class MovieDetail extends ConsumerWidget {
     required this.userRating,
     required this.ratingColor,
     required this.releaseDate,
+    required this.movieGenreList,
   });
 
   @override
@@ -48,9 +50,6 @@ class MovieDetail extends ConsumerWidget {
                 data: (data) => _buildDetails(
                   _themeNotifier,
                   getMovieDetail(data),
-                  userRating,
-                  ratingColor,
-                  releaseDate,
                 ),
                 error: (error, stackTrace) => Text(error.toString()),
                 loading: () => const SizedBox.shrink(),
@@ -80,9 +79,6 @@ class MovieDetail extends ConsumerWidget {
   Widget _buildDetails(
     ThemeSwitchProvider _themeNotifier,
     MovieDetailDataProvider movieDetail,
-    num? userRating,
-    Color ratingColor,
-    String? releaseDate,
   ) {
     return Stack(
       children: [
@@ -93,9 +89,7 @@ class MovieDetail extends ConsumerWidget {
             const SizedBox(height: 6.0),
             _buildSubtitle(
               _themeNotifier,
-              releaseDate,
               movieDetail.runtime,
-              'Fantasy',
             ),
             const SizedBox(height: 20.0),
             Text(
@@ -133,11 +127,10 @@ class MovieDetail extends ConsumerWidget {
 
   Widget _buildSubtitle(
     ThemeSwitchProvider _themeNotifier,
-    String? releaseDate,
     int? runtime,
-    String genre,
   ) {
-    return Row(
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.center,
       children: [
         //Year of Release
         Text(
@@ -156,11 +149,17 @@ class MovieDetail extends ConsumerWidget {
         ),
         const ItemSeparator(separatorColor: Color(0xFFB5251B)),
         //Genre
-        Text(
-          genre.toString(),
-          style: _themeNotifier.isDark
-              ? MoviDeckTheme.darkTextTheme.headline4
-              : MoviDeckTheme.lightTextTheme.headline4,
+        Wrap(
+          children: [
+            ...movieGenreList.map((genre) {
+              return Text(
+                (movieGenreList.last == genre) ? '$genre' : '$genre, ',
+                style: _themeNotifier.isDark
+                    ? MoviDeckTheme.darkTextTheme.headline4
+                    : MoviDeckTheme.lightTextTheme.headline4,
+              );
+            }),
+          ],
         ),
       ],
     );

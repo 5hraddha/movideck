@@ -82,6 +82,6 @@ class Movie {
 
   @override
   String toString() {
-    return 'titel: $title';
+    return 'title: $title';
   }
 }

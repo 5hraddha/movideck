@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -52,6 +54,16 @@ class WebApiImplementation implements WebApi {
     final response = await _dio.get(url);
     final MovieDetail movieDetail = MovieDetail.fromJson(response.data);
     return movieDetail;
+  }
+
+  @override
+  Future<List<Genre>> getGenres() async {
+    final url = '$_baseUrl/genre/movie/list?api_key=$_apiKey&language=en-US';
+    final response = await _dio.get(url);
+    final genres = response.data['genres'] as List;
+    final List<Genre> genreList =
+        genres.map((genre) => Genre.fromJson(genre)).toList();
+    return genreList;
   }
 }
 

@@ -6,7 +6,7 @@ class ItemSeparator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Wrap(
       children: [
         const SizedBox(width: 3.0),
         Container(
