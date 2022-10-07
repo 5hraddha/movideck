@@ -132,47 +132,50 @@ class MovieDetail extends ConsumerWidget {
     String language,
     int? runtime,
   ) {
-    return Wrap(
-      crossAxisAlignment: WrapCrossAlignment.center,
-      children: [
-        //Year of Release
-        Text(
-          getYear(releaseDate),
-          style: _themeNotifier.isDark
-              ? MoviDeckTheme.darkTextTheme.headline4
-              : MoviDeckTheme.lightTextTheme.headline4,
-        ),
-        const ItemSeparator(separatorColor: Color(0xFFB5251B)),
-        //Language
-        Text(
-          language,
-          style: _themeNotifier.isDark
-              ? MoviDeckTheme.darkTextTheme.headline4
-              : MoviDeckTheme.lightTextTheme.headline4,
-        ),
-        const ItemSeparator(separatorColor: Color(0xFFB5251B)),
-        //Runtime
-        Text(
-          getRuntime(runtime),
-          style: _themeNotifier.isDark
-              ? MoviDeckTheme.darkTextTheme.headline4
-              : MoviDeckTheme.lightTextTheme.headline4,
-        ),
-        const ItemSeparator(separatorColor: Color(0xFFB5251B)),
-        //Genre
-        Wrap(
-          children: [
-            ...movieGenreList.map((genre) {
-              return Text(
-                (movieGenreList.last == genre) ? '$genre' : '$genre, ',
-                style: _themeNotifier.isDark
-                    ? MoviDeckTheme.darkTextTheme.headline4
-                    : MoviDeckTheme.lightTextTheme.headline4,
-              );
-            }),
-          ],
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.only(right: 36.0),
+      child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
+        children: [
+          //Year of Release
+          Text(
+            getYear(releaseDate),
+            style: _themeNotifier.isDark
+                ? MoviDeckTheme.darkTextTheme.headline4
+                : MoviDeckTheme.lightTextTheme.headline4,
+          ),
+          const ItemSeparator(separatorColor: Color(0xFFB5251B)),
+          //Language
+          Text(
+            language,
+            style: _themeNotifier.isDark
+                ? MoviDeckTheme.darkTextTheme.headline4
+                : MoviDeckTheme.lightTextTheme.headline4,
+          ),
+          const ItemSeparator(separatorColor: Color(0xFFB5251B)),
+          //Runtime
+          Text(
+            getRuntime(runtime),
+            style: _themeNotifier.isDark
+                ? MoviDeckTheme.darkTextTheme.headline4
+                : MoviDeckTheme.lightTextTheme.headline4,
+          ),
+          const ItemSeparator(separatorColor: Color(0xFFB5251B)),
+          //Genre
+          Wrap(
+            children: [
+              ...movieGenreList.map((genre) {
+                return Text(
+                  (movieGenreList.last == genre) ? '$genre' : '$genre, ',
+                  style: _themeNotifier.isDark
+                      ? MoviDeckTheme.darkTextTheme.headline4
+                      : MoviDeckTheme.lightTextTheme.headline4,
+                );
+              }),
+            ],
+          ),
+        ],
+      ),
     );
   }
 
