@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../business_logic/view_models/view_models.dart';
@@ -29,6 +28,7 @@ class FavouriteMovies extends ConsumerWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 18.0, right: 18.0),
                 child: _buildFavouriteMoviesGrid(
+                  context,
                   _themeNotifier,
                   genreList,
                   _favouriteMoviesDataProvider,
@@ -58,17 +58,21 @@ class FavouriteMovies extends ConsumerWidget {
   }
 
   Widget _buildFavouriteMoviesGrid(
+    BuildContext context,
     ThemeSwitchProvider themeNotifier,
     List<GenreDataProvider> genreList,
     List<MovieViewModel> favouriteMovies,
   ) {
     if (favouriteMovies.isEmpty) {
-      return Center(
-        child: Text(
-          'No favourite movies yet!',
-          style: themeNotifier.isDark
-              ? MoviDeckTheme.darkTextTheme.headline2
-              : MoviDeckTheme.lightTextTheme.headline2,
+      return SizedBox(
+        height: MediaQuery.of(context).size.height / 1.4,
+        child: Center(
+          child: Text(
+            'No favourite movies yet!',
+            style: themeNotifier.isDark
+                ? MoviDeckTheme.darkTextTheme.headline2
+                : MoviDeckTheme.lightTextTheme.headline2,
+          ),
         ),
       );
     }
