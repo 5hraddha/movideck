@@ -1,18 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../business_logic/view_models/view_models.dart';
 import '../../business_logic/utils/helper_functions.dart';
 import '../widgets/widgets.dart';
 import '../movideck_theme.dart';
 
-class MovieCard extends StatelessWidget {
-  const MovieCard({super.key, required this.movie});
+class MovieCard extends ConsumerWidget {
+  const MovieCard({
+    super.key,
+    required this.movie,
+    required this.cardHeight,
+    required this.isFavourite,
+  });
   final MovieViewModel movie;
+  final double cardHeight;
+  final bool isFavourite;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final _watchFavouriteMoviesDataProvider =
+        ref.watch(favouriteMoviesDataProvider);
     return Container(
-      height: 190.0,
+      height: cardHeight,
       width: 145.0,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
@@ -40,7 +50,7 @@ class MovieCard extends StatelessWidget {
                 ratingColor: movie.movieRatingColor,
               ),
             ),
-            _buildAddFavouriteButton(),
+            _buildAddFavouriteButton(ref, _watchFavouriteMoviesDataProvider),
           ],
         ),
       ),
@@ -118,7 +128,10 @@ class MovieCard extends StatelessWidget {
     );
   }
 
-  Widget _buildAddFavouriteButton() {
+  Widget _buildAddFavouriteButton(
+    WidgetRef ref,
+    List<MovieViewModel> watchFavouriteMoviesDataProvider,
+  ) {
     return Positioned(
       top: 10.0,
       right: 10.0,
@@ -129,14 +142,40 @@ class MovieCard extends StatelessWidget {
             color: const Color(0xFF191919),
             borderRadius: BorderRadius.circular(50.0)),
         child: IconButton(
-          icon: const Icon(
-            Icons.add,
-            color: Colors.white,
-            size: 15.0,
-          ),
-          onPressed: () {},
+          icon: isFavourite
+              ? const Icon(
+                  Icons.remove,
+                  color: Colors.white,
+                  size: 15.0,
+                )
+              : const Icon(
+                  Icons.add,
+                  color: Colors.white,
+                  size: 15.0,
+                ),
+          onPressed: () => _handleFavouriteButtonPress(
+              ref, watchFavouriteMoviesDataProvider),
         ),
       ),
     );
+  }
+
+  void _handleFavouriteButtonPress(
+      WidgetRef ref, List<MovieViewModel> watchFavouriteMoviesDataProvider) {
+    if (isFavourite) {
+      //Remove from the favourite list
+      print(movie);
+      final previousFavourites = [...watchFavouriteMoviesDataProvider];
+      previousFavourites.remove(movie);
+      ref.read(favouriteMoviesDataProvider.notifier).state = [
+        ...previousFavourites
+      ];
+    } else {
+      //Add to the favourite list
+      ref.read(favouriteMoviesDataProvider.notifier).state = [
+        ...watchFavouriteMoviesDataProvider,
+        movie
+      ];
+    }
   }
 }

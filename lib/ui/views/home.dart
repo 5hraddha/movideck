@@ -21,6 +21,7 @@ class Home extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     //Providers
     final _themeNotifier = ref.watch(themeNotifierProvider);
+    final _favouriteMoviesDataProvider = ref.watch(favouriteMoviesDataProvider);
     final _genresDataProvider = ref.watch(genreDataProvider);
     final _nowPlayingMoviesDataProvider =
         ref.watch(nowPlayingMoviesDataProvider);
@@ -52,7 +53,10 @@ class Home extends ConsumerWidget {
                       data: (data) {
                         final movieViewModelData = getMovies(data);
                         return _buildSectionHorizontalList(
-                            movieViewModelData, genreList);
+                          movieViewModelData,
+                          genreList,
+                          _favouriteMoviesDataProvider,
+                        );
                       },
                       error: (error, stackTrace) => Text(error.toString()),
                       loading: () => const SizedBox.shrink(),
@@ -86,6 +90,7 @@ class Home extends ConsumerWidget {
   Widget _buildSectionHorizontalList(
     List<MovieViewModel> movieViewModelData,
     List<GenreDataProvider> genreList,
+    List<MovieViewModel> favouriteMoviesDataProvider,
   ) {
     return SizedBox(
       height: 200.0,
@@ -112,7 +117,12 @@ class Home extends ConsumerWidget {
                 ),
               );
             },
-            child: MovieCard(movie: movieViewModelData[index]),
+            child: MovieCard(
+              movie: movieViewModelData[index],
+              cardHeight: 190.0,
+              isFavourite: isAlreadyFavourite(
+                  favouriteMoviesDataProvider, movieViewModelData[index]),
+            ),
           );
         },
         separatorBuilder: (context, index) => const SizedBox(width: 1.0),
@@ -132,5 +142,23 @@ class Home extends ConsumerWidget {
       }
     }
     return movieGenreList;
+  }
+
+  //Check if the movie is already in favourite list
+  bool isAlreadyFavourite(
+    List<MovieViewModel> favouriteMoviesDataProvider,
+    MovieViewModel movie,
+  ) {
+    var isFavourite = false;
+
+    //Check if movie is already added as a favourite
+    for (final favouriteMovie in favouriteMoviesDataProvider) {
+      if (favouriteMovie.id == movie.id) {
+        isFavourite = true;
+        break;
+      }
+    }
+
+    return isFavourite;
   }
 }

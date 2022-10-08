@@ -16,4 +16,9 @@ class MovieViewModel {
   num? get voteAverage => movie.voteAverage;
   Color get movieRatingColor => Movie.getMovieRatingColor(movie.voteAverage);
   List<int?>? get genreIds => movie.genre_ids;
+
+  @override
+  String toString() {
+    return 'title: $title';
+  }
 }
