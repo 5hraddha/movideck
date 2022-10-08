@@ -164,7 +164,6 @@ class MovieCard extends ConsumerWidget {
       WidgetRef ref, List<MovieViewModel> watchFavouriteMoviesDataProvider) {
     if (isFavourite) {
       //Remove from the favourite list
-      print(movie);
       final previousFavourites = [...watchFavouriteMoviesDataProvider];
       previousFavourites.remove(movie);
       ref.read(favouriteMoviesDataProvider.notifier).state = [
