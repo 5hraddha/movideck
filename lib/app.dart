@@ -20,6 +20,7 @@ class App extends ConsumerWidget {
       title: 'MoviDeck',
       theme:
           _themeNotifier.isDark ? MoviDeckTheme.dark() : MoviDeckTheme.light(),
+      // darkTheme: MoviDeckTheme.dark(),
       home: SafeArea(
         child: Scaffold(
           appBar: _buildAppBar(),
