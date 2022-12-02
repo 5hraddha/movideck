@@ -2,65 +2,44 @@
 
 A flutter mobile app to refresh your experience of exploring movies
 
-## Assignment 1: Reuse Custom made widget
-
-### File having required code:
-
-https://github.com/5hraddha/movideck/blob/main/lib/components/movie_card.dart
-
-### GIF having required code:
+## MVVM Architecture
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/5hraddha/misc/master/images/a1.gif" width=700 alt="favourite pokemons" />
+<img src="https://raw.githubusercontent.com/5hraddha/misc/master/images/w7a1.gif" width=700 alt="MVVM Architecture" />
 </p>
 
-## Assignment 2: SliverAppBar
-
-### File having required code:
-
-https://github.com/5hraddha/movideck/blob/main/lib/components/custom_app_bar.dart
-https://github.com/5hraddha/movideck/blob/main/lib/screens/movie_detail.dart
-
-### GIF having required code:
+## Migrate All Stateful Widgets to Stateless Widgets
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/5hraddha/misc/master/images/a2.gif" width=700 alt="favourite pokemons" />
+<img src="https://raw.githubusercontent.com/5hraddha/misc/master/images/w7a2.gif" width=700 alt="Migrate All Stateful Widgets to Stateless Widgets" />
 </p>
 
-## Assignment 3: Custom Card
-
-### File having required code:
-
-https://github.com/5hraddha/movideck/blob/main/lib/components/movie_card.dart
-
-### GIF having required code:
+## Use Provider to manage State
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/5hraddha/misc/master/images/a3.gif" width=700 alt="favourite pokemons" />
+<img src="https://raw.githubusercontent.com/5hraddha/misc/master/images/w7a3.gif" width=700 alt="Use Provider to manage State" />
 </p>
 
-## Assignment 4: Scrollable Widgets
-
-### File having required code:
-
-https://github.com/5hraddha/movideck/blob/main/lib/screens/home.dart
-
-### GIF having required code:
+## Separate the business logic and UI logic of your capstone project
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/5hraddha/misc/master/images/a4.gif" width=700 alt="favourite pokemons" />
+<img src="https://raw.githubusercontent.com/5hraddha/misc/master/images/w7a4.gif" width=700 alt="Separate the business logic and UI logic of your capstone project" />
 </p>
 
-## Assignment 5: Styling using themes
-
-### File having required code:
-
-https://github.com/5hraddha/movideck/blob/main/lib/movideck_theme.dart
-https://github.com/5hraddha/movideck/blob/main/lib/app.dart
-https://github.com/5hraddha/movideck/blob/main/lib/components/theme_switch.dart
-
-### GIF having required code:
+## Create Network services to fetch API
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/5hraddha/misc/master/images/a5.gif" width=700 alt="favourite pokemons" />
+<img src="https://raw.githubusercontent.com/5hraddha/misc/master/images/w7a5.gif" width=700 alt="Create Network services to fetch API" />
+</p>
+
+## Have a model class to model your data and convert JSON to model data
+
+<p align="center">
+<img src="https://raw.githubusercontent.com/5hraddha/misc/master/images/w7a6.gif" width=700 alt="Have a model class to model your data and convert JSON to model data" />
+</p>
+
+## Create a View Model that will connect the model and view
+
+<p align="center">
+<img src="https://raw.githubusercontent.com/5hraddha/misc/master/images/w7a7.gif" width=700 alt="Create a View Model that will connect the model and view" />
 </p>

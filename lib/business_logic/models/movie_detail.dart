@@ -5,7 +5,7 @@ class MovieDetail {
   final String title;
   final String? backdropPath;
   final String? originalTitle;
-  final MovieLanguage originalLanguage;
+  final String originalLanguage;
   final String overview;
   final String? posterPath;
   final String? releaseDate;
@@ -32,7 +32,8 @@ class MovieDetail {
         title = json['title'] as String,
         backdropPath = json['backdropPath'] as String?,
         originalTitle = json['originalTitle'] as String?,
-        originalLanguage = MovieDetail.getLanguage(json['original_language']),
+        originalLanguage =
+            MovieDetail.getLanguage(json['original_language']).name,
         overview = json['overview'] as String,
         posterPath = json['posterPath'] as String?,
         releaseDate = json['releaseDate'] as String?,

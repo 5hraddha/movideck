@@ -1,6 +1,6 @@
-import '../models/models.dart';
+import '../../business_logic/models/models.dart';
 
-abstract class Repository {
+abstract class WebApi {
   Future<List<Movie>> getNowPlayingMovies();
   Future<List<Movie>> getPopularMovies();
   Future<List<Movie>> getTopRatedMovies();
